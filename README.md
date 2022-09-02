@@ -45,11 +45,18 @@ DATA_ROOT='DATA_ROOT_HERE'
 ### Depth Estimation
 
 For Depth estimation on KITTI 09 (if you want to test on KITTI 10, change the 
-`--dataset-list` to `.eval/kitti_10.txt`), run the following command:
+`--dataset-list` to `.eval/kitti_10.txt`, same set for Malaga dataset), run the following command:
+
+```shell
+ROOT=$ROOT/kitti_ckpt
+#ROOT=$ROOT/malaga_ckpt
+DATA_ROOT=$DATA_ROOT/KITTI_rec_256/ 
+#DATA_ROOT=$DATA_ROOT/Malaga_down/
+```
 
 ```shell
 python test_disp.py \
-   --pretrained-dispnet $ROOT/dispnet_checkpoint.pth.tar \
+   --pretrained-dispnet $ROOT/UnVIO_dispnet.pth.tar \
    --dataset-dir $DATA_ROOT \
    --dataset-list .eval/kitti_09.txt \
    --output-dir $ROOT/results_disp \
@@ -63,10 +70,18 @@ The `predictions.npy` that stores the all the depth values will be saved in `$RO
 For Odometry estimation KITTI 09 (if you want to test on KITTI 10, change the `testscene` to `2011_09_30_drive_0034_sync_02`), run the following command: 
 
 ```shell
+ROOT=$ROOT/kitti_ckpt
+DATA_ROOT=$DATA_ROOT
+```
+
+
+```shell
 python test_pose.py \
- --pretrained-posefea $ROOT/PoseNet_fea_model_best.pth.tar \
- --pretrained-imu $ROOT/DeepVIO_IMU_model_best.pth.tar\
- --pretrained-pose $ROOT/DeepVIO_POSE_model_best.pth.tar\
+ --pretrained-visualnet $ROOT/UnVIO_visualnet.pth.tar \
+ --pretrained-imunet $ROOT/UnVIO_imunet.pth.tar\
+ --pretrained-posenet $ROOT/UnVIO_posenet.pth.tar\
+ --dataset_root $DATA_ROOT \
+ --dataset KITTI \
  --testscene 2011_09_30_drive_0033_sync_02 \
  --show-traj
 ```
@@ -78,10 +93,14 @@ This will create a `.csv` file represneting $T_{wc} \in \mathbb{R}^{3 \times 4}$
 Run the following command to train the UnVIO from scratch:
 
 ```shell
-python train.py 
+DATA_ROOT=$DATA_ROOT
 ```
 
-specify `--dataset` as you need.
+```shell
+python train.py --dataset_root $DATA_ROOT --dataset KITTI
+```
+
+specify `--dataset (KITTI or Malaga)` as you need.
 
 ## Citation
 

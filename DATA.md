@@ -1,6 +1,11 @@
 Note that we resize the image both in
 KITTI dataset and Malaga dataset from original resolution into $832 \times 256$. 
 
+Download [KITTI_dataset.tar.gz](https://pan.baidu.com/s/1GZx-v71DDBLhICxAcsJ1pg?pwd=xsf2) and [Malaga_dataset.tar.gz](https://pan.baidu.com/s/1SWlr2SiDxByoLRZiml3MRQ?pwd=fjf2)
+and extract them into folders `KITTI_rec_256` and `Malaga_down` in `$DATA_ROOT`. Then download
+[kitti_ckpt.tar.gz](https://pan.baidu.com/s/1LVadWtHBXJfh0Qz_lS63HQ?pwd=dj2f) and [malaga_ckpt.tar.gz](https://pan.baidu.com/s/1t2iSBwq_NpJ1PCKUOpIFMg?pwd=bggp) and extract them into
+folders `kitti_ckpt` and `malaga_ckpt` in `$ROOT`
+
 ## KITTI dataset
 
 We list the sequence index of KITTI Odometry split and corresponding folder name
